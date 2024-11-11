@@ -1,21 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using WDSE;
-using WDSE.Decorators;
-using WDSE.ScreenshotMaker;
 
 namespace Landing
 {
@@ -67,20 +54,20 @@ namespace Landing
                 ScreenShootPath = ScrShootPath + "\\LandingPage";
 
 
-                try
-                {
-                    webDriver.FindElement(CookieCloseBtn).Click();
-                    Thread.Sleep(4000);
-                    VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker().RemoveScrollBarsWhileShooting());
-                    webDriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save(ScreenShootPath + ScrTimeStamp + System.Drawing.Imaging.ImageFormat.Png);
-                }
+                //try
+                //{
+                //    webDriver.FindElement(CookieCloseBtn).Click();
+                //    Thread.Sleep(4000);
+                //    VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker().RemoveScrollBarsWhileShooting());
+                //    webDriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save(ScreenShootPath + ScrTimeStamp + System.Drawing.Imaging.ImageFormat.Png);
+                //}
 
-                catch (Exception)
-                {
-                    Thread.Sleep(4000);
-                    VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker().RemoveScrollBarsWhileShooting());
-                    webDriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save(ScreenShootPath + ScrTimeStamp + System.Drawing.Imaging.ImageFormat.Png);
-                };
+                //catch (Exception)
+                //{
+                //    Thread.Sleep(4000);
+                //    VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker().RemoveScrollBarsWhileShooting());
+                //    webDriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save(ScreenShootPath + ScrTimeStamp + System.Drawing.Imaging.ImageFormat.Png);
+                //};
             }
 
 
