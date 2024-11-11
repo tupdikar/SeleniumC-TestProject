@@ -1,0 +1,2 @@
+﻿InputLogin=MailinatorTest5@mailinator.com
+InputPassword=*Sigma@12569
