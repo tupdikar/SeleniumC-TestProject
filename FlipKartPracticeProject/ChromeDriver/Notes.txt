@@ -1,0 +1,2 @@
+﻿To download new chrome and chrome driver user following link
+https://googlechromelabs.github.io/chrome-for-testing/#stable

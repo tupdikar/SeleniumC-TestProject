@@ -3,12 +3,16 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using NUnit.Framework;
+using OpenQA.Selenium.Support.Extensions;
+using WDSE;
+using WDSE.Decorators;
+using WDSE.ScreenshotMaker;
+
 
 namespace Landing
 {
-
     class LandingPage
-
     {
 
         //Landing page
@@ -20,104 +24,39 @@ namespace Landing
         public static By LoginInputUserId = By.XPath("//*[@id=\"container\"]/div/div[3]/div/div[2]/div/form/div[1]/input");
         public static By LoginPageHeader = By.XPath("//*[@id=\"container\"]/div/div[3]/div/div[1]/span/span");
         public static By LoginPageSubHeader = By.XPath("//*[@id=\"container\"]/div/div[3]/div/div[1]/p/span");
-        public static By RequestOptButton = By.XPath("/html/body/div[3]/div/div/div/div[2]/div/form/div[3]/button");
-        public static By VerifyOtpButton = By.XPath("/html/body/div[3]/div/div/div/div[2]/div/div/form/button");
+        public static By RequestOptButton = By.XPath("//*[@id=\"container\"]/div/div[3]/div/div[2]/div/form/div[3]/button");
+        public static By VerifyOtpButton = By.XPath("//*[@id=\"container\"]/div/div[3]/div/div[2]/div/div/form/button");
 
         public class PageObjectModelMethods
+
         {
 
-            IWebDriver webDriver;
+            private IWebDriver webDriver;
 
             public PageObjectModelMethods(IWebDriver driver)
             {
-                this.webDriver = driver;
-            }
-
-            public void PageRefresh()
-            {
-                webDriver.Navigate().Refresh();
-
-            }
-            public void LandingPageSwitchURL(string URL)
-            {
-
-                webDriver.Navigate().GoToUrl(URL);
-                Thread.Sleep(4000);
-            }
-
-            public void TakeScreenShotLanding(string ScrShootPath)
-            {
-
-                // Take screen shots
-                string ScrTimeStamp = "." + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss") + ".";
-                string ScreenShootPath;
-                ScreenShootPath = ScrShootPath + "\\LandingPage";
-
-
-                //try
-                //{
-                //    webDriver.FindElement(CookieCloseBtn).Click();
-                //    Thread.Sleep(4000);
-                //    VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker().RemoveScrollBarsWhileShooting());
-                //    webDriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save(ScreenShootPath + ScrTimeStamp + System.Drawing.Imaging.ImageFormat.Png);
-                //}
-
-                //catch (Exception)
-                //{
-                //    Thread.Sleep(4000);
-                //    VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker().RemoveScrollBarsWhileShooting());
-                //    webDriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save(ScreenShootPath + ScrTimeStamp + System.Drawing.Imaging.ImageFormat.Png);
-                //};
+                webDriver = driver;
             }
 
 
-
-            public List<string> LandingPageLogoAndHeader()
+            public void LandingPageLogoAndHeader()
             {
-                TimeSpan sp = TimeSpan.FromSeconds(15);
-                WebDriverWait wait = new WebDriverWait(this.webDriver, sp);
 
-                try
-                {
-                    wait.Until(driver => driver.FindElement(LandingPageLogo));
-                    wait.Until(driver => driver.FindElement(LandingPageGroceryLable));
-                }
+                    webDriver.FindElement(LandingPageLogo);
+                    webDriver.FindElement(LandingPageGroceryLable);
 
-                catch (Exception)
-                {
-                    webDriver.Navigate().Refresh();
-                    wait.Until(driver => driver.FindElement(LandingPageLogo));
-                    wait.Until(driver => driver.FindElement(LandingPageGroceryLable));
-
-                };
-
-                List<string> listVal = new List<string>
-                {
-                     webDriver.FindElement(LandingPageGroceryLable).Text,
-                     webDriver.FindElement(LandingPageMobileLable).Text
-                };
-                return listVal;
             }
 
-            public List<string> LoginProccess(string userid)
+            public void LoginProccess(string userid)
             {
-                TimeSpan sp = TimeSpan.FromMilliseconds(15000);
-                WebDriverWait wait = new WebDriverWait(this.webDriver, sp);
 
-                wait.Until(driver => driver.FindElement(LandingPageLogo));
-                wait.Until(driver => driver.FindElement(LoginButton));
+                webDriver.FindElement(LandingPageLogo);
+                webDriver.FindElement(LoginButton);
 
                 webDriver.FindElement(LoginButton).Click();
                 webDriver.FindElement(LoginInputUserId).SendKeys(userid);
                 webDriver.FindElement(RequestOptButton).Click();
 
-                List<string> listVal = new List<string>
-                {
-                    webDriver.FindElement(LoginPageHeader).Text,
-                    webDriver.FindElement(LoginPageSubHeader).Text
-                };
-
-                return listVal;
             }
 
 
